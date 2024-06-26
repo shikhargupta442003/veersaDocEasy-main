@@ -72,6 +72,8 @@ fun docSignUpContactInfo(){
         Text(text = "Add Location on Maps", fontSize = 18.sp, fontWeight = FontWeight.SemiBold,modifier=Modifier.padding(bottom = 8.dp))
         Spacer(modifier = Modifier.padding(vertical = 44.dp))
 
+
+
         Spacer(modifier = Modifier.padding(vertical = 4.dp))
         Text(text = "Upload your profile picture", fontSize = 18.sp, fontWeight = FontWeight.SemiBold,modifier=Modifier.padding(bottom = 8.dp))
         OutlinedTextField(
