@@ -79,6 +79,11 @@ dependencies {
     implementation("androidx.compose.material3:material3-adaptive-navigation-suite:1.0.0-alpha06")
 
     implementation ("com.google.android.material:material:1.9.0")
+    implementation(platform("com.google.firebase:firebase-bom:33.1.1"))
+
+    // Add the dependency for the Realtime Database library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation("com.google.firebase:firebase-database")
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")

@@ -15,6 +15,10 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -30,6 +34,18 @@ import com.example.doceasy.R
 
 @Composable
 fun docSignUp() {
+    var name by remember {
+        mutableStateOf("")
+    }
+    var gender by remember {
+        mutableStateOf("")
+    }
+    var dob by remember {
+        mutableStateOf("")
+    }
+    var mobileNo by remember {
+        mutableStateOf("")
+    }
     Column(
         modifier = Modifier
             .padding(horizontal = 20.dp)
@@ -55,7 +71,7 @@ fun docSignUp() {
                 .background(color = colorResource(id = R.color.box_inside_color))
         ) {
             OutlinedTextField(
-                value = "",
+                value = name,
                 shape = RoundedCornerShape(12.dp),
                 modifier = Modifier
                     .background(color = colorResource(id = R.color.box_inside_color))
@@ -68,6 +84,7 @@ fun docSignUp() {
                     )
                 },
                 onValueChange = {
+                    name=it
                 }
             )
         }
@@ -84,7 +101,7 @@ fun docSignUp() {
                 .background(color = colorResource(id = R.color.box_inside_color))
         ) {
             OutlinedTextField(
-                value = "",
+                value = gender,
                 shape = RoundedCornerShape(12.dp),
                 modifier = Modifier
                     .background(color = colorResource(id = R.color.box_inside_color))
@@ -97,6 +114,7 @@ fun docSignUp() {
                     )
                 },
                 onValueChange = {
+                    gender=it
                 }
             )
         }
@@ -113,13 +131,14 @@ fun docSignUp() {
                 .background(color = colorResource(id = R.color.box_inside_color))
         ) {
             OutlinedTextField(
-                value = "",
+                value = dob,
                 shape = RoundedCornerShape(12.dp),
                 modifier = Modifier
                     .background(color = colorResource(id = R.color.box_inside_color))
                     .fillMaxWidth(),
                 placeholder = { Text("Enter Your Date of Birth", fontWeight = FontWeight.Bold) },
                 onValueChange = {
+                    dob=it
                 }
             )
         }
@@ -137,7 +156,7 @@ fun docSignUp() {
                 .background(color = colorResource(id = R.color.box_inside_color))
         ) {
             OutlinedTextField(
-                value = "",
+                value = mobileNo,
                 shape = RoundedCornerShape(12.dp),
                 modifier = Modifier
                     .background(color = colorResource(id = R.color.box_inside_color))
@@ -150,6 +169,7 @@ fun docSignUp() {
                     )
                 },
                 onValueChange = {
+                    mobileNo=it
                 }
             )
         }
