@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "899298298503",
+    "project_id": "doceasy-1bf8c",
+    "storage_bucket": "doceasy-1bf8c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:899298298503:android:5ea4f9478156e6709f8622",
+        "android_client_info": {
+          "package_name": "com.example.doceasy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAq4FGvg33MC6DOaojNUoDL6ryL6u9C7Vg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
