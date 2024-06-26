@@ -15,6 +15,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
@@ -172,7 +173,7 @@ fun docSignUp() {
                 drawRoundRect(color = Color(0xffADD8E6), style = stroke)
             }
             .clickable { }) {
-            
+            Text(text=" Browse Image",modifier=Modifier.align(Alignment.Center), color =Color(0xff0096FF), fontWeight = FontWeight.SemiBold, fontSize = 24.sp )
         }
         Button(
             onClick = {},
