@@ -19,14 +19,14 @@ import androidx.compose.ui.unit.sp
 import com.example.doceasy.R
 
 @Composable
-fun docSignUp(){
+fun docSignUpAdditionalInfo(){
     Column(modifier= Modifier
         .padding(horizontal = 20.dp)
         .fillMaxWidth()){
         Box (modifier=Modifier.padding(horizontal = 20.dp, vertical = 24.dp)){
-            Text("Create New Account", color = colorResource(id = R.color.theme_color1), fontSize = 24.sp, fontWeight = FontWeight.ExtraBold )
+            Text("Additional Information", color = colorResource(id = R.color.theme_color1), fontSize = 24.sp, fontWeight = FontWeight.ExtraBold )
         }
-        Text(text = "Full Name", fontSize = 18.sp, fontWeight = FontWeight.SemiBold,modifier=Modifier.padding(vertical = 8.dp))
+        Text(text = "Preferred Payment Mode of Consultation Fees ", fontSize = 18.sp, fontWeight = FontWeight.SemiBold,modifier=Modifier.padding(vertical = 8.dp))
         Box(modifier=Modifier.clip(RoundedCornerShape(12.dp)).background(color = colorResource(id = R.color.box_inside_color))){
             OutlinedTextField(
                 value = "",
@@ -34,13 +34,13 @@ fun docSignUp(){
                 modifier = Modifier
                     .background(color = colorResource(id = R.color.box_inside_color))
                     .fillMaxWidth(),
-                placeholder = { Text("Enter Your Full Name", color= colorResource(id = R.color.box_hint_color), fontWeight = FontWeight.Bold) },
+                placeholder = { Text("Mode of Payment", color= colorResource(id = R.color.box_hint_color), fontWeight = FontWeight.Bold) },
                 onValueChange = {
                 }
             )
         }
         Spacer(modifier = Modifier.padding(vertical = 4.dp))
-        Text(text = "Gender", fontSize = 18.sp, fontWeight = FontWeight.SemiBold,modifier=Modifier.padding(bottom = 8.dp))
+        Text(text = "Insurance Partners(if any)", fontSize = 18.sp, fontWeight = FontWeight.SemiBold,modifier=Modifier.padding(bottom = 8.dp))
         Box(modifier=Modifier.clip(RoundedCornerShape(12.dp)).background(color = colorResource(id = R.color.box_inside_color))){
             OutlinedTextField(
                 value = "",
@@ -48,13 +48,13 @@ fun docSignUp(){
                 modifier = Modifier
                     .background(color = colorResource(id = R.color.box_inside_color))
                     .fillMaxWidth(),
-                placeholder = { Text("Enter Your Gender", color= colorResource(id = R.color.box_hint_color), fontWeight = FontWeight.Bold) },
+                placeholder = { Text("nsurance Partners(if any)", color= colorResource(id = R.color.box_hint_color), fontWeight = FontWeight.Bold) },
                 onValueChange = {
                 }
             )
         }
         Spacer(modifier = Modifier.padding(vertical = 4.dp))
-        Text(text = "Date of Birth", fontSize = 18.sp, fontWeight = FontWeight.SemiBold,modifier=Modifier.padding(bottom = 8.dp))
+        Text(text = "Emergency Contact Details", fontSize = 18.sp, fontWeight = FontWeight.SemiBold,modifier=Modifier.padding(bottom = 8.dp))
         Box(modifier=Modifier.clip(RoundedCornerShape(12.dp)).background(color = colorResource(id = R.color.box_inside_color))) {
             OutlinedTextField(
                 value = "",
@@ -62,38 +62,10 @@ fun docSignUp(){
                 modifier = Modifier
                     .background(color = colorResource(id = R.color.box_inside_color))
                     .fillMaxWidth(),
-                placeholder = { Text("Enter Your Date of Birth", fontWeight = FontWeight.Bold) },
+                placeholder = { Text("Emergency Contact Details", fontWeight = FontWeight.Bold) },
                 onValueChange = {
                 }
             )
         }
-
-        Spacer(modifier = Modifier.padding(vertical = 4.dp))
-        Text(text = "Mobile No.", fontSize = 18.sp, fontWeight = FontWeight.SemiBold,modifier=Modifier.padding(bottom = 8.dp))
-        Box(modifier=Modifier.clip(RoundedCornerShape(12.dp)).background(color = colorResource(id = R.color.box_inside_color))){
-            OutlinedTextField(
-                value = "",
-                shape = RoundedCornerShape(12.dp),
-                modifier = Modifier
-                    .background(color = colorResource(id = R.color.box_inside_color))
-                    .fillMaxWidth(),
-                placeholder = { Text("Enter Your Phone Number", color= colorResource(id = R.color.box_hint_color), fontWeight = FontWeight.Bold) },
-                onValueChange = {
-                }
-            )
-        }
-
-        Spacer(modifier = Modifier.padding(vertical = 4.dp))
-        Text(text = "Upload your profile picture", fontSize = 18.sp, fontWeight = FontWeight.SemiBold,modifier=Modifier.padding(bottom = 8.dp))
-        OutlinedTextField(
-            value = "",
-            shape = RoundedCornerShape(12.dp),
-            modifier = Modifier
-                .background(color = colorResource(id = R.color.box_inside_color))
-                .fillMaxWidth(),
-            placeholder = { Text("Enter Your Full Name", color= colorResource(id = R.color.box_hint_color), fontWeight = FontWeight.Bold) },
-            onValueChange = {
-            }
-        )
     }
 }
