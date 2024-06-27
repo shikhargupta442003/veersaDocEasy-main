@@ -27,6 +27,9 @@ class MainActivity : ComponentActivity() {
                     composable("docSignUp"){
                         docSignUp(navController=navController)
                     }
+                    composable("docProfileUser"){
+                        docProfileUser(navController=navController)
+                    }
                     composable("docSignUpProfessionalInfo"){
                         docSignUpProfessionalInfo(navController=navController)
                     }

@@ -20,7 +20,7 @@ data class doctorData(
     val affiliations:String="",
     val fees:String="",
     val availableHours:String="",
-    val timeSlots:String="",
+    val timeSlots:String="0-0",
     val license:String="",
     val idProof:String="",
     val qualificationProof:String="",
@@ -28,6 +28,7 @@ data class doctorData(
     val insurancePartner:String="",
     val emergencyContact:String="",
     val password:String="",
+    val timeslotList: List<Pair<String, Int>> = listOf(),
 )
 fun doctorData.toMap():Map<String,Any?>{
     return mapOf(
@@ -55,6 +56,7 @@ fun doctorData.toMap():Map<String,Any?>{
         "insurancePartner" to insurancePartner,
         "emergencyContact" to emergencyContact,
         "password" to password,
+        "timeslotList" to timeslotList
     )
 }
 fun saveDoctorData(doctor:doctorData,onSucess:()->Unit,onFailure:(Exception)->Unit){

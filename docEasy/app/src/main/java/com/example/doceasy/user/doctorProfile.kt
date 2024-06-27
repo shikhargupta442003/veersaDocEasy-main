@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -34,6 +35,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.doceasy.R
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -124,7 +128,7 @@ fun docProfileUser(navController: NavController){
                     .padding(top = 12.dp)
                     .fillMaxWidth()
             ) {
-                Text("TimeSlot")
+                Text("Date")
                 Text("See All")
             }
             LazyRow {
@@ -150,11 +154,11 @@ fun docProfileUser(navController: NavController){
                     .padding(top = 12.dp)
                     .fillMaxWidth()
             ) {
-                Text("Date")
+                Text("TimeSlot")
                 Text("See All")
             }
             LazyRow {
-                items(3) {
+                items(generateTimeSlots("1-5")) {
                     Card(
                         modifier = Modifier
                             .padding(20.dp)
@@ -186,4 +190,26 @@ fun docProfileUser(navController: NavController){
             }
         }
     }
+}
+fun generateTimeSlots(input:String):List<String>{
+    val (start,end)=input.split("-").map{it.toInt()}
+    val timeSlots = mutableListOf<String>()
+    val dateFormat = SimpleDateFormat("h:mm", Locale.getDefault())
+
+    for (hour in start until end) {
+        var calendar = Calendar.getInstance().apply {
+            set(Calendar.HOUR_OF_DAY, hour)
+            set(Calendar.MINUTE, 0)
+        }
+        while (calendar.get(Calendar.HOUR_OF_DAY) < hour + 1) {
+            val startTime = dateFormat.format(calendar.time)
+            calendar.add(Calendar.MINUTE, 20)
+            val endTime = dateFormat.format(calendar.time)
+            if (calendar.get(Calendar.HOUR_OF_DAY) < hour + 1 || (calendar.get(Calendar.HOUR_OF_DAY) == hour + 1 && calendar.get(Calendar.MINUTE) == 0)) {
+                timeSlots.add("$startTime-$endTime")
+            }
+        }
+    }
+
+    return timeSlots
 }
