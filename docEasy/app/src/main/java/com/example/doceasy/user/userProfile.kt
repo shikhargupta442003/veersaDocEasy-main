@@ -28,6 +28,8 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -94,7 +96,42 @@ fun userProfile(){
 
                 })
         },
-
+        bottomBar = {
+            NavigationBar {
+                NavigationBarItem(selected = false, onClick = { /*TODO*/ },icon = {
+                    Icon(
+                        painterResource(id = R.drawable.ic_launcher_background),
+                        modifier = Modifier.size(20.dp),
+                        contentDescription = "upload"
+                    )
+                },
+                    label = {Text("Expenses")})
+                NavigationBarItem(selected = false, onClick = { /*TODO*/ },icon = {
+                    Icon(
+                        painterResource(id = R.drawable.ic_launcher_background),
+                        modifier = Modifier.size(20.dp),
+                        contentDescription = "upload"
+                    )
+                },
+                    label = {Text("Expenses")})
+                NavigationBarItem(selected = false, onClick = { /*TODO*/ },icon = {
+                    Icon(
+                        painterResource(id = R.drawable.ic_launcher_background),
+                        modifier = Modifier.size(20.dp),
+                        contentDescription = "upload"
+                    )
+                },
+                    label = {Text("Expenses")})
+                NavigationBarItem(selected = false, onClick = { /*TODO*/ },icon = {
+                    Icon(
+                        painterResource(id = R.drawable.ic_launcher_background),
+                        modifier = Modifier.size(20.dp),
+                        contentDescription = "upload"
+                    )
+                },
+                    label = {Text("Expenses")})
+            }
+        }
     ) {innerPadding->
         Column(modifier=Modifier.padding(innerPadding)){
             Row(
