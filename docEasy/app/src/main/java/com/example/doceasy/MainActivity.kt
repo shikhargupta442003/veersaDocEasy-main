@@ -16,10 +16,14 @@ import com.example.doceasy.user.allCategories
 import com.example.doceasy.user.allDoctors
 import com.example.doceasy.user.docProfileUser
 import com.example.doceasy.user.userProfile
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        lateinit var fusedLocationClient: FusedLocationProviderClient
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         setContent {
             DocEasyTheme {
                 val navController= rememberNavController()
@@ -31,7 +35,7 @@ class MainActivity : ComponentActivity() {
                         docSignUpProfessionalInfo(navController=navController)
                     }
                     composable("docSignUpContactInfo"){
-                        docSignUpContactInfo(navController=navController)
+                        docSignUpContactInfo(navController=navController, fusedLocationClient)
                     }
                     composable("docSignUpWorkInfo"){
                         docSignUpWorkInfo(navController=navController)

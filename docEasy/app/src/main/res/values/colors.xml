@@ -15,5 +15,6 @@
     <color name="box_inside_color">#4dd9d9d9</color>
     <color name="box_hint_color">#ff858585</color>
     <color name="light_blue">#ADD8E6</color>
+    <color name="blue">#208AFF</color>
 
 </resources>
