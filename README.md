@@ -1,6 +1,6 @@
-# DocEasy![1719509166971](image/README/1719509166971.png)
+# DocEasy
 
-LINK FOR Figma:- https://www.figma.com/design/15SpYp6289sFHuuXEdypIR/Doc-Easy?node-id=0-1&t=5ngZAHaOwO2l29wR-1
+LINK FOR FIGMA-https://www.figma.com/design/15SpYp6289sFHuuXEdypIR/Doc-Easy?node-id=0-1&t=5ngZAHaOwO2l29wR-1
 
 **Mobile Application for Scheduling an Appointment for a Patient with Doctor**
 **1.Problem Statement**
@@ -38,6 +38,20 @@ Database: Firebase
 APIs: Google Maps API for location-based services
 Notifications: Firebase Cloud Messaging
 
-**5.Snapshots of our application**
+**5.Installation and Setup**
 
-![1719510017697](image/README/1719510017697.png)
+Installation
+git clone https://github.com/aouadimed/Consult-Plus-App.git
+
+
+**Install the dependencies:**
+
+for Android Studio, dependencies are automatically installed
+Run the application:
+
+for Android Studio, run the app with emulator or physical device
+License
+This project is released under the MIT License.
+
+Contact
+Feel free to reach out to aouadimed204@gmail.com with any questions or feedback.
