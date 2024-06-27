@@ -102,36 +102,36 @@ fun userProfile(navController: NavController,email:String?){
             NavigationBar {
                 NavigationBarItem(selected = false, onClick = { /*TODO*/ },icon = {
                     Icon(
-                        painterResource(id = R.drawable.ic_launcher_background),
+                        painterResource(id = R.drawable.home),
                         modifier = Modifier.size(20.dp),
                         contentDescription = "upload"
                     )
                 },
-                    label = {Text("Expenses")})
+                    label = {Text("Home")})
                 NavigationBarItem(selected = false, onClick = { /*TODO*/ },icon = {
                     Icon(
-                        painterResource(id = R.drawable.ic_launcher_background),
+                        painterResource(id = R.drawable.clock),
                         modifier = Modifier.size(20.dp),
                         contentDescription = "upload"
                     )
                 },
-                    label = {Text("Expenses")})
+                    label = {Text("Schedule")})
                 NavigationBarItem(selected = false, onClick = { /*TODO*/ },icon = {
                     Icon(
-                        painterResource(id = R.drawable.ic_launcher_background),
+                        painterResource(id = R.drawable.location),
                         modifier = Modifier.size(20.dp),
                         contentDescription = "upload"
                     )
                 },
-                    label = {Text("Expenses")})
+                    label = {Text("Map")})
                 NavigationBarItem(selected = false, onClick = { /*TODO*/ },icon = {
                     Icon(
-                        painterResource(id = R.drawable.ic_launcher_background),
+                        painterResource(id = R.drawable.profile),
                         modifier = Modifier.size(20.dp),
                         contentDescription = "upload"
                     )
                 },
-                    label = {Text("Expenses")})
+                    label = {Text("Profile")})
             }
         }
     ) {innerPadding->

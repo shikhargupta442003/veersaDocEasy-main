@@ -50,15 +50,15 @@ fun docProfileUser(navController: NavController,email:String?){
                         modifier = Modifier.fillMaxWidth()
                     ) {
                         Image(
-                            painter = painterResource(R.drawable.ic_launcher_background),
+                            painter = painterResource(R.drawable.back),
                             contentDescription = "avatar",
                             contentScale = ContentScale.Crop,            // crop the image if it's not a square
                             modifier = Modifier
-                                .size(20.dp)
+                                .size(35.dp)
                             // add a border (optional)
                         )
 
-                        Text("All Doctors", fontSize = 16.sp)
+                        Text("    Doctors", fontSize = 24.sp)
 
 
                     }
@@ -80,7 +80,7 @@ fun docProfileUser(navController: NavController,email:String?){
             ) {
                 Row(modifier = Modifier.padding(20.dp)) {
                     Image(
-                        painter = painterResource(R.drawable.ic_launcher_background),
+                        painter = painterResource(R.drawable.male_doctor),
                         contentDescription = "avatar",
                         contentScale = ContentScale.Crop,            // crop the image if it's not a square
                         modifier = Modifier
@@ -95,7 +95,7 @@ fun docProfileUser(navController: NavController,email:String?){
                         ) {
                             Text("Dr. Pawan")
                             Image(
-                                painter = painterResource(R.drawable.ic_launcher_background),
+                                painter = painterResource(R.drawable.phone),
                                 contentDescription = "avatar",
                                 contentScale = ContentScale.Crop,            // crop the image if it's not a square
                                 modifier = Modifier
@@ -142,9 +142,13 @@ fun docProfileUser(navController: NavController,email:String?){
                         )
                     ) {
                         Text(
-                            "$it", textAlign = TextAlign.Center, modifier = Modifier
+                            "$it", textAlign = TextAlign.Center,
+                                fontWeight = FontWeight.Bold,
+                                color = Color.White,
+                                modifier = Modifier
                                 .fillMaxSize()
                                 .align(Alignment.CenterHorizontally)
+                                .padding(vertical = 12.dp)
                         )
                     }
                 }
@@ -168,9 +172,13 @@ fun docProfileUser(navController: NavController,email:String?){
                         )
                     ) {
                         Text(
-                            "$it", textAlign = TextAlign.Center, modifier = Modifier
+                            "$it", textAlign = TextAlign.Center,
+                                fontWeight = FontWeight.Bold,
+                                color = Color.White,
+                                modifier = Modifier
                                 .fillMaxSize()
                                 .align(Alignment.CenterHorizontally)
+                                .padding(vertical = 12.dp)
                         )
                     }
                 }
