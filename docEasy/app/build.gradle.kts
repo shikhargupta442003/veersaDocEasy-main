@@ -97,4 +97,14 @@ dependencies {
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
     implementation ("androidx.navigation:navigation-compose:2.4.2")
+
+
+
+
+    implementation("com.google.android.gms:play-services-maps:18.2.0")
+
+    implementation ("androidx.compose.material3:material3:1.0.0-alpha13")
+    implementation ("com.google.accompanist:accompanist-permissions:0.24.3-alpha")
+    implementation ("com.google.android.gms:play-services-location:18.0.0")
+
 }

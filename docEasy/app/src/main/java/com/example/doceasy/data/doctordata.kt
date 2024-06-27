@@ -6,6 +6,8 @@ import com.google.firebase.database.database
 data class doctorData(
     val email:String="",
     val name:String="",
+    val age:String="",
+    val phone:String="",
     val gender:String="",
     val dob:String="",
     val profilePic:String="",
