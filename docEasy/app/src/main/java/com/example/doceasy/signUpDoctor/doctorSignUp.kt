@@ -32,13 +32,14 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.doceasy.R
 import com.example.doceasy.data.doctorData
 import com.example.doceasy.data.saveDoctorData
 
 
 @Composable
-fun docSignUp() {
+fun docSignUp(navController: NavController) {
     var name by remember {
         mutableStateOf("")
     }
@@ -217,6 +218,7 @@ fun docSignUp() {
                       )
                 saveDoctorData(doctor, onSucess = { Toast.makeText(context, "Data saved successfully", Toast.LENGTH_SHORT).show()}, onFailure = {exception->
                     Toast.makeText(context, "Error: ${exception.message}", Toast.LENGTH_SHORT).show()})
+                navController.navigate("docSignUpContactInfo")
             },
             shape = RoundedCornerShape(12.dp),
             modifier = Modifier
