@@ -8,6 +8,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.doceasy.signUpDoctor.docSignUp
 import com.example.doceasy.signUpDoctor.docSignUpAdditionalInfo
 import com.example.doceasy.signUpDoctor.docSignUpContactInfo
+import com.example.doceasy.signUpDoctor.docSignUpLoginTerms
 import com.example.doceasy.signUpDoctor.docSignUpProfessionalInfo
 import com.example.doceasy.signUpDoctor.docSignUpWorkInfo
 import com.example.doceasy.ui.theme.DocEasyTheme
@@ -36,7 +37,7 @@ class MainActivity : ComponentActivity() {
                         docSignUpWorkInfo(navController=navController)
                     }
                     composable("docSignUpLoginTerms"){
-                        docSignUpWorkInfo(navController=navController)
+                        docSignUpLoginTerms(navController=navController)
                     }
                     composable("docSignUpAdditionalInfo"){
                         docSignUpAdditionalInfo(navController=navController)
