@@ -25,12 +25,13 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.doceasy.R
 import com.example.doceasy.data.doctorData
 import com.example.doceasy.data.saveDoctorData
 
 @Composable
-fun docSignUpLoginTerms(){
+fun docSignUpLoginTerms(navController: NavController){
     var email by remember {
         mutableStateOf("")
     }

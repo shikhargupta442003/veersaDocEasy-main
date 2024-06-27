@@ -42,12 +42,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.doceasy.R
 import com.example.doceasy.data.Specialist
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun userProfile(){
+fun userProfile(navController: NavController){
     Scaffold(
         topBar = {
             TopAppBar(

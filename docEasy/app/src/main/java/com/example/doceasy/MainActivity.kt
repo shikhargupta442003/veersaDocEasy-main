@@ -2,42 +2,62 @@ package com.example.doceasy
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.doceasy.signUpDoctor.docSignUp
+import com.example.doceasy.signUpDoctor.docSignUpAdditionalInfo
 import com.example.doceasy.signUpDoctor.docSignUpContactInfo
+import com.example.doceasy.signUpDoctor.docSignUpProfessionalInfo
+import com.example.doceasy.signUpDoctor.docSignUpWorkInfo
 import com.example.doceasy.ui.theme.DocEasyTheme
+import com.example.doceasy.user.allCategories
+import com.example.doceasy.user.allDoctors
 import com.example.doceasy.user.docProfileUser
+import com.example.doceasy.user.userProfile
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             DocEasyTheme {
+                val navController= rememberNavController()
+                NavHost(navController = navController, startDestination = "docSignUp" ){
+                    composable("docSignUp"){
+                        docSignUp(navController=navController)
+                    }
+                    composable("docSignUpProfessionalInfo"){
+                        docSignUpProfessionalInfo(navController=navController)
+                    }
+                    composable("docSignUpContactInfo"){
+                        docSignUpContactInfo(navController=navController)
+                    }
+                    composable("docSignUpWorkInfo"){
+                        docSignUpWorkInfo(navController=navController)
+                    }
+                    composable("docSignUpLoginTerms"){
+                        docSignUpWorkInfo(navController=navController)
+                    }
+                    composable("docSignUpAdditionalInfo"){
+                        docSignUpAdditionalInfo(navController=navController)
+                    }
+                    composable("userProfile"){
+                        userProfile(navController=navController)
+                    }
+                    composable("docProfileUser"){
+                        docProfileUser(navController=navController)
+                    }
+                    composable("allDoctors"){
+                        allDoctors(navController=navController)
+                    }
+                    composable("allCategories"){
+                        allCategories(navController=navController)
+                    }
 
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    docProfileUser()
                 }
+
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    docSignUpContactInfo()
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    DocEasyTheme {
-        Greeting("Android")
-    }
-}

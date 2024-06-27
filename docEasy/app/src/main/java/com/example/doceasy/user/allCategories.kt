@@ -39,12 +39,13 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.doceasy.R
 import com.example.doceasy.data.Specialist
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun allCategories(
+fun allCategories(navController: NavController
 ) {
     var category by remember {
         mutableStateOf(false)
