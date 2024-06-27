@@ -32,14 +32,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             DocEasyTheme {
                 val navController= rememberNavController()
-                NavHost(navController = navController, startDestination = "docSignUpLoginTerms" ){
+                NavHost(navController = navController, startDestination = "userSignUp" ){
                     composable("docSignUp/{email}"){
                             backStackEntry ->
                         val email = backStackEntry.arguments?.getString("email")
                         docSignUp(navController = navController, email = email)
-                    }
-                    composable("docProfileUser/{email}"){
-                        docProfileUser(navController=navController)
                     }
                     composable("docSignUpProfessionalInfo/{email}"){
                             backStackEntry ->
@@ -64,31 +61,35 @@ class MainActivity : ComponentActivity() {
                         val email = backStackEntry.arguments?.getString("email")
                         docSignUpAdditionalInfo(navController=navController, email = email)
                     }
-                    composable("userProfile"){
-                        userProfile(navController=navController)
-                    }
-                    composable("docProfileUser"){
-                        docProfileUser(navController=navController)
-                    }
-                    composable("userSignUp"){
-                        userSignUp(navController=navController,auth)
-                    }
-                    composable("userProfile"){
+                    composable("userPersonalDetails/{email}"){
                             backStackEntry ->
                         val email = backStackEntry.arguments?.getString("email")
-                        userProfile(navController=navController,email)
+                        userPersonalDetails(navController=navController,email)
                     }
-                    composable("docProfileUser"){
+                    composable("docProfileUser/{email}"){
                             backStackEntry ->
                         val email = backStackEntry.arguments?.getString("email")
                         docProfileUser(navController=navController,email)
                     }
-                    composable("allDoctors"){
+                    composable("userSignUp"){
+                        userSignUp(navController=navController,auth)
+                    }
+                    composable("userProfile/{email}"){
+                            backStackEntry ->
+                        val email = backStackEntry.arguments?.getString("email")
+                        userProfile(navController=navController,email)
+                    }
+                    composable("docProfileUser/{email}"){
+                            backStackEntry ->
+                        val email = backStackEntry.arguments?.getString("email")
+                        docProfileUser(navController=navController,email)
+                    }
+                    composable("allDoctors/{email}"){
                             backStackEntry ->
                         val email = backStackEntry.arguments?.getString("email")
                         allDoctors(navController=navController,email)
                     }
-                    composable("allCategories"){
+                    composable("allCategories/{email}"){
                             backStackEntry ->
                         val email = backStackEntry.arguments?.getString("email")
                         allCategories(navController=navController,email)

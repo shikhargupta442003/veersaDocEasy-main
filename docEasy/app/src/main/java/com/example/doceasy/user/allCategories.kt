@@ -50,7 +50,7 @@ import com.example.doceasy.data.Specialist
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun allCategories(navController: NavController
+fun allCategories(navController: NavController,email:String?
 ) {
     var category by remember {
         mutableStateOf(false)
@@ -131,6 +131,7 @@ fun allCategories(navController: NavController
                                     .width(140.dp)
                                     .height(80.dp).clickable {
                                                              category=true
+                                        navController.navigate("docProfileUser/$email")
                                     },colors = CardDefaults.cardColors(
                                     containerColor = Color(0xff00de8e)
                                 )) {
@@ -165,7 +166,9 @@ fun allCategories(navController: NavController
                     items(20){
                         Card(modifier = Modifier
                             .padding(20.dp).fillMaxWidth()
-                            .height(160.dp),colors = CardDefaults.cardColors(
+                            .height(160.dp).clickable {
+                                navController.navigate("docProfileUser/$email")
+                            },colors = CardDefaults.cardColors(
                             containerColor = Color(0x0F20201F)
                         )){
                             Row(modifier = Modifier.padding(20.dp)){

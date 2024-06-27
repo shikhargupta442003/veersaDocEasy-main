@@ -1,6 +1,7 @@
 package com.example.doceasy.user
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -202,7 +203,9 @@ fun userProfile(navController: NavController,email:String?){
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp),horizontalArrangement = Arrangement.SpaceBetween){
                 Text("Categories")
-                Text("See All")
+                Text("See All",modifier=Modifier.clickable {
+                    navController.navigate("allCategories/$email")
+                })
             }
             LazyRow {
                 items(Specialist.predefinedSpecialists){specialist->
@@ -240,7 +243,10 @@ fun userProfile(navController: NavController,email:String?){
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp),horizontalArrangement = Arrangement.SpaceBetween){
                 Text("All Doctors")
-                Text("See All")
+                Text("See All",modifier=Modifier.clickable {
+                    navController.navigate("allDoctors/$email")
+                }
+                    )
             }
             LazyColumn {
                 items(20){

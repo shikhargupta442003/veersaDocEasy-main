@@ -122,7 +122,7 @@ fun userSignUp(navController: NavController,auth: FirebaseAuth) {
                 } else {
                     Toast.makeText(context, "Please fill in all fields", Toast.LENGTH_SHORT).show()
                 }
-                navController.navigate("docSignUpContactInfo/${email}")
+                navController.navigate("userPersonalDetails/${email}")
             },
             shape = RoundedCornerShape(12.dp),
             modifier = Modifier

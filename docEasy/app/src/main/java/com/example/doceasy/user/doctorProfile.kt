@@ -41,7 +41,7 @@ import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun docProfileUser(navController: NavController){
+fun docProfileUser(navController: NavController,email:String?){
     Scaffold(
         topBar = {
             TopAppBar(

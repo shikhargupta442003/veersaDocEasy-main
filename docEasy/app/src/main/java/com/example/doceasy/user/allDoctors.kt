@@ -37,7 +37,7 @@ import com.example.doceasy.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun allDoctors(navController: NavController
+fun allDoctors(navController: NavController,email:String?
 ) {
     Scaffold(
         topBar = {
