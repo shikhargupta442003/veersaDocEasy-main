@@ -4,10 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.location.Geocoder
 import android.location.Location
-import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,7 +12,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -35,18 +31,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.doceasy.R
-import com.example.doceasy.data.doctorData
 import com.example.doceasy.data.saveDoctorData
-import com.google.android.gms.location.FusedLocationProviderClient
-import java.util.Locale
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
-import java.util.*
+import com.google.android.gms.location.FusedLocationProviderClient
+import java.util.Locale
 
 @SuppressLint("MissingPermission")
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
-fun docSignUpContactInfo(navController: NavController, fusedLocationClient: FusedLocationProviderClient){
+fun docSignUpContactInfo(navController: NavController, fusedLocationClient: FusedLocationProviderClient,email:String?){
 
     val locationPermissionState = rememberMultiplePermissionsState(
         permissions = listOf(
@@ -237,14 +231,15 @@ fun docSignUpContactInfo(navController: NavController, fusedLocationClient: Fuse
 
         Button(
             onClick = {
-                val doctor = doctorData(
-                    address = clinicAddress,
-                    state = state,
-                    pinCode = pincode
-                )
-                saveDoctorData(doctor, onSucess = { Toast.makeText(context, "Data saved successfully", Toast.LENGTH_SHORT).show()}, onFailure = { exception->
-                    Toast.makeText(context, "Error: ${exception.message}", Toast.LENGTH_SHORT).show()})
-                navController.navigate("docSignUpWorkInfo")
+                val updates = mutableMapOf<String, Any>()
+                updates["email"] = email.toString()
+                updates["pinCode"] = pincode
+                updates["address"] = clinicAddress
+                updates["state"] = state
+                updates["locationMaps"]=locationvalue
+                saveDoctorData(  email=email.toString(),onSucess = { Toast.makeText(context, "Data saved successfully", Toast.LENGTH_SHORT).show()}, onFailure = { exception->
+                    Toast.makeText(context,"Error: ${exception.message}", Toast.LENGTH_SHORT).show()},updates)
+                navController.navigate("docSignUpWorkInfo/$email")
 
             },
             shape = RoundedCornerShape(12.dp),

@@ -31,7 +31,7 @@ import com.example.doceasy.data.doctorData
 import com.example.doceasy.data.saveDoctorData
 
 @Composable
-fun docSignUpProfessionalInfo(navController: NavController){
+fun docSignUpProfessionalInfo(navController: NavController,email:String?){
     var medicalLicenseNumber by remember {
         mutableStateOf("")
     }
@@ -216,9 +216,16 @@ fun docSignUpProfessionalInfo(navController: NavController){
                     affiliations = affiliations,
                     qualifications = qualifications
                 )
-                saveDoctorData(doctor, onSucess = { Toast.makeText(context, "Data saved successfully", Toast.LENGTH_SHORT).show()}, onFailure = { exception->
-                    Toast.makeText(context, "Error: ${exception.message}", Toast.LENGTH_SHORT).show()})
-                navController.navigate("docSignUpAdditionalInfo")
+                val updates = mutableMapOf<String, Any>()
+                updates["email"] = email.toString()
+                updates["license"] = medicalLicenseNumber
+                updates["specialization"] = specilization
+                updates["experience"] = yearsOfExperience
+                updates["affiliations"] = affiliations
+                updates["qualifications"] = qualifications
+                saveDoctorData(email.toString(), onSucess = { Toast.makeText(context, "Data saved successfully", Toast.LENGTH_SHORT).show()}, onFailure = { exception->
+                    Toast.makeText(context, "Error: ${exception.message}", Toast.LENGTH_SHORT).show()},updates)
+                navController.navigate("docSignUpAdditionalInfo/$email")
 
             },
             shape = RoundedCornerShape(12.dp),

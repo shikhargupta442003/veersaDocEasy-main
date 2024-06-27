@@ -1,7 +1,6 @@
 package com.example.doceasy.user
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.paddingFrom
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
@@ -53,7 +51,7 @@ import com.example.doceasy.data.Specialist
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun userProfile(navController: NavController){
+fun userProfile(navController: NavController,email:String?){
     Scaffold(
         topBar = {
             TopAppBar(

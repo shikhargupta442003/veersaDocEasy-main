@@ -1,5 +1,6 @@
 package com.example.doceasy.signUpDoctor
 
+import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -27,11 +28,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.doceasy.R
-import com.example.doceasy.data.doctorData
-import com.example.doceasy.data.saveDoctorData
+import com.google.firebase.auth.FirebaseAuth
 
 @Composable
-fun docSignUpLoginTerms(navController: NavController){
+fun docSignUpLoginTerms(navController: NavController,auth: FirebaseAuth){
     var email by remember {
         mutableStateOf("")
     }
@@ -126,13 +126,13 @@ fun docSignUpLoginTerms(navController: NavController){
 
         Button(
             onClick = {
-                val doctor= doctorData(
-                    email = email,
-                    password = password
-                )
-                saveDoctorData(doctor, onSucess = { Toast.makeText(context, "Data saved successfully", Toast.LENGTH_SHORT).show()}, onFailure = { exception->
-                    Toast.makeText(context, "Error: ${exception.message}", Toast.LENGTH_SHORT).show()})
-                navController.navigate("docSignUp")
+
+                if (email.isNotEmpty() && password.isNotEmpty()) {
+                    signInWithEmailAndPassword(email, password,auth,context)
+                } else {
+                    Toast.makeText(context, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+                }
+                navController.navigate("docSignUp/$email")
 
             },
             shape = RoundedCornerShape(12.dp),
@@ -146,4 +146,17 @@ fun docSignUpLoginTerms(navController: NavController){
         }
 
     }
+}
+ fun signInWithEmailAndPassword(email: String, password: String,auth: FirebaseAuth,context: Context) {
+    auth.createUserWithEmailAndPassword(email, password)
+        .addOnCompleteListener() { task ->
+            if (task.isSuccessful) {
+                Toast.makeText(context, "Authentication SuccessFull.", Toast.LENGTH_SHORT).show()
+                // Sign in success, update UI with the signed-in user's information
+            } else {
+                // If sign in fails, display a message to the user.
+                Toast.makeText(context, "Authentication failed.", Toast.LENGTH_SHORT).show()
+
+            }
+        }
 }

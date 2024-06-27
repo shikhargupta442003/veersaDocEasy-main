@@ -27,14 +27,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.doceasy.R
-import com.example.doceasy.data.doctorData
 import com.example.doceasy.data.saveDoctorData
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
 @Composable
-fun docSignUpWorkInfo(navController: NavController){
+fun docSignUpWorkInfo(navController: NavController,email:String?){
     var consultationFees by remember {
         mutableStateOf("")
     }
@@ -150,15 +149,15 @@ fun docSignUpWorkInfo(navController: NavController){
         Button(
             onClick = {
                 generateTimeSlots(timeSlots)
-                val doctor= doctorData(
-                    fees = consultationFees ,
-                    availableHours = availableHours,
-                    timeSlots = timeSlots,
-                    timeslotList = timeslotlist
-                )
-                saveDoctorData(doctor, onSucess = { Toast.makeText(context, "Data saved successfully", Toast.LENGTH_SHORT).show()}, onFailure = { exception->
-                    Toast.makeText(context, "Error: ${exception.message}", Toast.LENGTH_SHORT).show()})
-                navController.navigate("docSignUpProfessionalInfo")
+                val updates = mutableMapOf<String, Any>()
+                updates["email"] = email.toString()
+                updates["fees"] = consultationFees
+                updates["availableHours"] = availableHours
+                updates["timeslotList"] = timeslotlist
+                updates["timeSlots"] = timeSlots
+                saveDoctorData( email=email.toString(),onSucess = { Toast.makeText(context, "Data saved successfully", Toast.LENGTH_SHORT).show()}, onFailure = { exception->
+                    Toast.makeText(context, "Error: ${exception.message}", Toast.LENGTH_SHORT).show()},updates)
+                navController.navigate("docSignUpProfessionalInfo/$email")
 
             },
             shape = RoundedCornerShape(12.dp),

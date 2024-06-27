@@ -1,5 +1,8 @@
 package com.example.doceasy.data
 
+import com.google.firebase.Firebase
+import com.google.firebase.database.database
+
 data class userData(
     val email:String="",
     val name:String="",
@@ -7,13 +10,17 @@ data class userData(
     val number:String="",
     val gender:String="",
     val age:String="",
+    val password:String=""
 )
-fun userData.toMap():Map<String,Any?>{
-    return mapOf(
-        "email" to email,
-        "name" to name,
-        "gender" to gender,
-        "appointmentTime" to appointmentTime,
-        "number" to number
-    )
+fun savePatientData(email: String,onSucess:()->Unit,onFailure:(Exception)->Unit,updates:MutableMap<String,Any>){
+    val db= Firebase.database
+    val doctorsRef=db.getReference("patients")
+    val encodedEmail=email.replace(".",",")
+    val doctorRef=doctorsRef.child(encodedEmail)
+    doctorRef.updateChildren(updates).addOnSuccessListener {
+        onSucess()
+    }
+        .addOnFailureListener { exception->
+            onFailure(exception)
+        }
 }

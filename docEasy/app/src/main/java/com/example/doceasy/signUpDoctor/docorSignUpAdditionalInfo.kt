@@ -27,11 +27,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.doceasy.R
-import com.example.doceasy.data.doctorData
 import com.example.doceasy.data.saveDoctorData
 
 @Composable
-fun docSignUpAdditionalInfo(navController: NavController){
+fun docSignUpAdditionalInfo(navController: NavController,email:String?){
     var paymentMode by remember {
         mutableStateOf("")
     }
@@ -144,13 +143,13 @@ fun docSignUpAdditionalInfo(navController: NavController){
 
         Button(
             onClick = {
-                val doctor= doctorData(
-                    paymentMethod = paymentMode ,
-                    insurancePartner = insurancePartners,
-                    emergencyContact = emergencyDetails
-                )
-                saveDoctorData(doctor, onSucess = { Toast.makeText(context, "Data saved successfully", Toast.LENGTH_SHORT).show()}, onFailure = { exception->
-                    Toast.makeText(context, "Error: ${exception.message}", Toast.LENGTH_SHORT).show()})
+                val updates = mutableMapOf<String, Any>()
+                updates["email"] = email.toString()
+                updates["paymentMethod"] = paymentMode
+                updates["emergencyContact"] = emergencyDetails
+                updates["insurancePartner"] = insurancePartners
+                saveDoctorData(email=email.toString() , onSucess = { Toast.makeText(context, "Data saved successfully", Toast.LENGTH_SHORT).show()}, onFailure = { exception->
+                    Toast.makeText(context, "Error: ${exception.message}", Toast.LENGTH_SHORT).show()},updates)
 
             },
             shape = RoundedCornerShape(12.dp),

@@ -106,5 +106,6 @@ dependencies {
     implementation ("androidx.compose.material3:material3:1.0.0-alpha13")
     implementation ("com.google.accompanist:accompanist-permissions:0.24.3-alpha")
     implementation ("com.google.android.gms:play-services-location:18.0.0")
+    implementation ("com.google.firebase:firebase-auth-ktx:21.0.6")
 
 }
