@@ -1,7 +1,6 @@
 package com.example.doceasy.user
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -53,8 +52,6 @@ import java.util.Locale
 fun docProfileUser(navController: NavController,email:String?,database: FirebaseDatabase,doctorEmail:String?){
     val doctorsListState = remember { mutableStateOf<doctorData?>(null) }
     fetchDoctorData(database, doctorsListState,doctorEmail)
-    val filteredTimeSlots = doctorsListState.value?.timeslotList?.filter { it.second == 1 }
-
     Scaffold(
         topBar = {
             TopAppBar(
@@ -175,22 +172,17 @@ fun docProfileUser(navController: NavController,email:String?,database: Firebase
                 Text("See All")
             }
             LazyRow {
-                items(filteredTimeSlots ?: emptyList()) {timeSlot->
+                items(generateTimeSlots("1-5")) {
                     Card(
                         modifier = Modifier
                             .padding(20.dp)
                             .width(120.dp)
-                            .height(50.dp).clickable {
-                                val updatedTimeSlots = doctorsListState.value?.timeslotList?.map {
-                                    if (it == timeSlot) it.copy(second = 0) else it
-                                }
-                                doctorsListState.value = updatedTimeSlots?.let { it1 -> doctorsListState.value!!.copy(timeslotList = it1) }
-                            }, colors = CardDefaults.cardColors(
+                            .height(50.dp), colors = CardDefaults.cardColors(
                             containerColor = Color(0xff00de8e)
                         )
                     ) {
                         Text(
-                            "$timeSlot", textAlign = TextAlign.Center,
+                            "$it", textAlign = TextAlign.Center,
                                 fontWeight = FontWeight.Bold,
                                 color = Color.White,
                                 modifier = Modifier
