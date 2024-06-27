@@ -1,6 +1,7 @@
 package com.example.doceasy.user
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -23,6 +24,9 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -35,14 +39,22 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.doceasy.R
+import com.example.doceasy.data.doctorData
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun docProfileUser(navController: NavController,email:String?,database: FirebaseDatabase){
+fun docProfileUser(navController: NavController,email:String?,database: FirebaseDatabase,doctorEmail:String?){
+    val doctorsListState = remember { mutableStateOf<doctorData?>(null) }
+    fetchDoctorData(database, doctorsListState,doctorEmail)
+    val filteredTimeSlots = doctorsListState.value?.timeslotList?.filter { it.second == 1 }
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -94,7 +106,7 @@ fun docProfileUser(navController: NavController,email:String?,database: Firebase
                             modifier = Modifier.width(200.dp),
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {
-                            Text("Dr. Pawan")
+                            Text("${doctorsListState.value?.name}")
                             Image(
                                 painter = painterResource(R.drawable.phone),
                                 contentDescription = "avatar",
@@ -106,14 +118,14 @@ fun docProfileUser(navController: NavController,email:String?,database: Firebase
                             )
                         }
                         Spacer(modifier = Modifier.padding(vertical = 4.dp))
-                        Text("Speciality")
+                        Text("Speciality:${doctorsListState.value?.specialization}")
 
                         Row(
                             modifier = Modifier.width(200.dp),
                             horizontalArrangement = Arrangement.SpaceBetween,
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Text("Consultation Fees: Rs120.00",)
+                            Text("Consultation Fees: ${doctorsListState.value?.fees}",)
 
                         }
                     }
@@ -163,17 +175,22 @@ fun docProfileUser(navController: NavController,email:String?,database: Firebase
                 Text("See All")
             }
             LazyRow {
-                items(generateTimeSlots("1-5")) {
+                items(filteredTimeSlots ?: emptyList()) {timeSlot->
                     Card(
                         modifier = Modifier
                             .padding(20.dp)
                             .width(120.dp)
-                            .height(50.dp), colors = CardDefaults.cardColors(
+                            .height(50.dp).clickable {
+                                val updatedTimeSlots = doctorsListState.value?.timeslotList?.map {
+                                    if (it == timeSlot) it.copy(second = 0) else it
+                                }
+                                doctorsListState.value = updatedTimeSlots?.let { it1 -> doctorsListState.value!!.copy(timeslotList = it1) }
+                            }, colors = CardDefaults.cardColors(
                             containerColor = Color(0xff00de8e)
                         )
                     ) {
                         Text(
-                            "$it", textAlign = TextAlign.Center,
+                            "$timeSlot", textAlign = TextAlign.Center,
                                 fontWeight = FontWeight.Bold,
                                 color = Color.White,
                                 modifier = Modifier
@@ -221,4 +238,27 @@ fun generateTimeSlots(input:String):List<String>{
     }
 
     return timeSlots
+}
+private fun fetchDoctorData(
+    database: FirebaseDatabase,
+    userNameState: MutableState<doctorData?>,
+    doctorEmail: String?
+) {
+    val usersRef = database.getReference("doctors")
+    val userEmail = doctorEmail?.replace(".", ",")
+
+    if (userEmail != null) {
+        usersRef.child(userEmail).addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val doctor = snapshot.getValue(doctorData::class.java)
+                if (doctor != null) {
+                    userNameState.value=doctor
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Handle database error
+            }
+        })
+    }
 }

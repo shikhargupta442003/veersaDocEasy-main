@@ -17,6 +17,7 @@ import com.example.doceasy.ui.theme.DocEasyTheme
 import com.example.doceasy.user.allCategories
 import com.example.doceasy.user.allDoctors
 import com.example.doceasy.user.docProfileUser
+import com.example.doceasy.user.specialityPage
 import com.example.doceasy.user.userProfile
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -69,11 +70,7 @@ class MainActivity : ComponentActivity() {
                         val email = backStackEntry.arguments?.getString("email")
                         userPersonalDetails(navController=navController,email)
                     }
-                    composable("docProfileUser/{email}"){
-                            backStackEntry ->
-                        val email = backStackEntry.arguments?.getString("email")
-                        docProfileUser(navController=navController,email,database)
-                    }
+
                     composable("userSignUp"){
                         userSignUp(navController=navController,auth)
                     }
@@ -82,10 +79,11 @@ class MainActivity : ComponentActivity() {
                         val email = backStackEntry.arguments?.getString("email")
                         userProfile(navController=navController,email,database)
                     }
-                    composable("docProfileUser/{email}"){
+                    composable("docProfileUser/{email}/{docMail}"){
                             backStackEntry ->
                         val email = backStackEntry.arguments?.getString("email")
-                        docProfileUser(navController=navController,email,database)
+                        val doctorMail=backStackEntry.arguments?.getString("docMail")
+                        docProfileUser(navController=navController,email,database,doctorMail)
                     }
                     composable("allDoctors/{email}"){
                             backStackEntry ->
@@ -96,6 +94,12 @@ class MainActivity : ComponentActivity() {
                             backStackEntry ->
                         val email = backStackEntry.arguments?.getString("email")
                         allCategories(navController=navController,email,database)
+                    }
+                    composable("specialityPage/{email}/{speciality}"){
+                            backStackEntry ->
+                        val email = backStackEntry.arguments?.getString("email")
+                        val speciality = backStackEntry.arguments?.getString("speciality")
+                        specialityPage(navController=navController,email,database,speciality)
                     }
 
                 }

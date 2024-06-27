@@ -231,7 +231,7 @@ fun userProfile(navController: NavController,email:String?,database: FirebaseDat
                         .padding(10.dp)
                         .width(120.dp)
                         .height(50.dp).clickable {
-                            navController.navigate("allDoctors/$email")
+                            navController.navigate("specialityPage/$email/${specialist.name}")
                         },colors = CardDefaults.cardColors(
                         containerColor = Color(0xff00de8e))) {
                         Box(
@@ -301,11 +301,11 @@ fun userProfile(navController: NavController,email:String?,database: FirebaseDat
                                     )
                                 }
                                 Spacer(modifier=Modifier.padding(vertical=4.dp))
-                                Text("${it.locationMaps}")
+                                Text("bsbfsnfiosvshsnsknfosinf")
 
                                 Row(modifier=Modifier.width(200.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically){
                                     Button(onClick = {
-                                        navController.navigate("docProfileUser/$email")
+                                        navController.navigate("docProfileUser/$email/{${it.email}")
                                     }){
                                         Text("Book", )
                                     }
