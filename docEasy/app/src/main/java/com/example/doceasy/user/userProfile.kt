@@ -26,6 +26,8 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -81,7 +83,42 @@ fun userProfile(){
 
                 })
         },
-        bottomBar = {}
+        bottomBar = {
+            NavigationBar {
+                NavigationBarItem(selected = false, onClick = { /*TODO*/ },icon = {
+                    Icon(
+                        painterResource(id = R.drawable.ic_launcher_background),
+                        modifier = Modifier.size(20.dp),
+                        contentDescription = "upload"
+                    )
+                },
+                    label = {Text("Expenses")})
+                NavigationBarItem(selected = false, onClick = { /*TODO*/ },icon = {
+                    Icon(
+                        painterResource(id = R.drawable.ic_launcher_background),
+                        modifier = Modifier.size(20.dp),
+                        contentDescription = "upload"
+                    )
+                },
+                    label = {Text("Expenses")})
+                NavigationBarItem(selected = false, onClick = { /*TODO*/ },icon = {
+                    Icon(
+                        painterResource(id = R.drawable.ic_launcher_background),
+                        modifier = Modifier.size(20.dp),
+                        contentDescription = "upload"
+                    )
+                },
+                    label = {Text("Expenses")})
+                NavigationBarItem(selected = false, onClick = { /*TODO*/ },icon = {
+                    Icon(
+                        painterResource(id = R.drawable.ic_launcher_background),
+                        modifier = Modifier.size(20.dp),
+                        contentDescription = "upload"
+                    )
+                },
+                    label = {Text("Expenses")})
+            }
+        }
     ) {innerPadding->
         Column(modifier=Modifier.padding(innerPadding)){
             Row(
@@ -163,7 +200,8 @@ fun userProfile(){
             LazyColumn {
                 items(20){
                     Card(modifier = Modifier
-                        .padding(20.dp).fillMaxWidth()
+                        .padding(20.dp)
+                        .fillMaxWidth()
                         .height(160.dp),colors = CardDefaults.cardColors(
                         containerColor = Color(0x0F20201F)
                     )){

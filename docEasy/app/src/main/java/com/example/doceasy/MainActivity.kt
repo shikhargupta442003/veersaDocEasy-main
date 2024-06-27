@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.doceasy.signUpDoctor.docSignUpContactInfo
 import com.example.doceasy.ui.theme.DocEasyTheme
-import com.example.doceasy.user.userProfile
+import com.example.doceasy.user.docProfileUser
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    userProfile()
+                    docProfileUser()
                 }
             }
         }
