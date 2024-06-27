@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.paddingFrom
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
@@ -52,17 +53,28 @@ fun userProfile(){
                 title={
                     Row(
                         modifier=Modifier.fillMaxWidth()
-                    ){
-                        Image(
-                            painter = painterResource(R.drawable.ic_launcher_background),
-                            contentDescription = "avatar",
-                            contentScale = ContentScale.Crop,            // crop the image if it's not a square
-                            modifier = Modifier
-                                .size(48.dp)
-                                .clip(CircleShape)                       // clip to the circle shape
-                                .border(2.dp, Color.Gray, CircleShape)   // add a border (optional)
-                        )
+
+                    )
+                    {
                         Column {
+                            Spacer(modifier = Modifier.padding(top = 18.dp))
+                            Image(
+                                painter = painterResource(R.drawable.user),
+                                contentDescription = "avatar",
+                                contentScale = ContentScale.Crop,            // crop the image if it's not a square
+                                modifier = Modifier
+                                    .size(40.dp)
+                                    .clip(CircleShape)
+                                    // clip to the circle shape
+                                    .border(
+                                        2.dp,
+                                        Color.Gray,
+                                        CircleShape
+                                    )   // add a border (optional)
+                            )
+                        }
+                        Column(Modifier.padding(start = 24.dp, top = 12.dp)) {
+
                             Text("Hi, Welcome Back,", fontSize = 16.sp)
                             Text("Shikhar Gupta")
                         }
@@ -80,6 +92,7 @@ fun userProfile(){
                     }
 
                 })
+
         },
         bottomBar = {}
     ) {innerPadding->
@@ -163,7 +176,8 @@ fun userProfile(){
             LazyColumn {
                 items(20){
                     Card(modifier = Modifier
-                        .padding(20.dp).fillMaxWidth()
+                        .padding(20.dp)
+                        .fillMaxWidth()
                         .height(160.dp),colors = CardDefaults.cardColors(
                         containerColor = Color(0x0F20201F)
                     )){

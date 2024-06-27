@@ -8,13 +8,19 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.doceasy.signUpDoctor.SecondActivity
+import com.example.doceasy.signUpDoctor.docSignUp
 import com.example.doceasy.signUpDoctor.docSignUpContactInfo
 import com.example.doceasy.ui.theme.DocEasyTheme
 import com.example.doceasy.user.userProfile
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        lateinit var fusedLocationClient: FusedLocationProviderClient
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         setContent {
             DocEasyTheme {
 
@@ -31,7 +37,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
-    docSignUpContactInfo()
+    docSignUp()
 }
 
 @Preview(showBackground = true)

@@ -87,4 +87,11 @@ dependencies {
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation("com.google.firebase:firebase-database")
     implementation("com.google.firebase:firebase-analytics")
+
+
+    implementation ("androidx.compose.ui:ui:1.3.0")
+    implementation ("androidx.compose.material3:material3:1.0.0-alpha13")
+    implementation ("com.google.accompanist:accompanist-permissions:0.24.3-alpha")
+    implementation ("com.google.android.gms:play-services-location:18.0.0")
+
 }
