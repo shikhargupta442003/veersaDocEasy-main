@@ -1,10 +1,14 @@
 package com.example.doceasy
+import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.core.app.NotificationCompat
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.work.Worker
+import androidx.work.WorkerParameters
 import com.example.doceasy.signUpDoctor.docSignUp
 import com.example.doceasy.signUpDoctor.docSignUpAdditionalInfo
 import com.example.doceasy.signUpDoctor.docSignUpContactInfo
@@ -25,6 +29,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         lateinit var auth: FirebaseAuth
@@ -33,6 +38,11 @@ class MainActivity : ComponentActivity() {
         database = FirebaseDatabase.getInstance()
         lateinit var fusedLocationClient: FusedLocationProviderClient
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+        var builder = NotificationCompat.Builder(this,"1")
+            .setSmallIcon(R.drawable.notification_bell)
+            .setContentTitle("DocEasy")
+            .setContentText("Appointment Info")
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
         setContent {
             DocEasyTheme {
                 val navController= rememberNavController()
@@ -108,4 +118,16 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+class NotificationWorker(
+    appContext: Context,
+    workerParams: WorkerParameters,
+): Worker(appContext, workerParams) {
+    override fun doWork(): Result {
 
+        // Show notifications ...
+
+
+        // Indicate whether the work finished successfully with the Result
+        return Result.success()
+    }
+}
