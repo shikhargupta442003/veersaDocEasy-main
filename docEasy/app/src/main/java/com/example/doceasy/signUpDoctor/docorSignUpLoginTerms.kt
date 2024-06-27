@@ -132,6 +132,7 @@ fun docSignUpLoginTerms(navController: NavController){
                 )
                 saveDoctorData(doctor, onSucess = { Toast.makeText(context, "Data saved successfully", Toast.LENGTH_SHORT).show()}, onFailure = { exception->
                     Toast.makeText(context, "Error: ${exception.message}", Toast.LENGTH_SHORT).show()})
+                navController.navigate("docSignUp")
 
             },
             shape = RoundedCornerShape(12.dp),
@@ -141,7 +142,7 @@ fun docSignUpLoginTerms(navController: NavController){
                 .size(52.dp),
             colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.theme_color1))
         ) {
-            Text(text = "Submit", fontWeight = FontWeight.ExtraBold, fontSize = 20.sp)
+            Text(text = "Next", fontWeight = FontWeight.ExtraBold, fontSize = 20.sp)
         }
 
     }

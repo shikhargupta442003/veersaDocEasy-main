@@ -218,7 +218,7 @@ fun docSignUp(navController: NavController) {
                       )
                 saveDoctorData(doctor, onSucess = { Toast.makeText(context, "Data saved successfully", Toast.LENGTH_SHORT).show()}, onFailure = {exception->
                     Toast.makeText(context, "Error: ${exception.message}", Toast.LENGTH_SHORT).show()})
-                navController.navigate("docSignUpWorkInfo")
+                navController.navigate("docSignUpContactInfo")
             },
             shape = RoundedCornerShape(12.dp),
             modifier = Modifier

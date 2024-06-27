@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             DocEasyTheme {
                 val navController= rememberNavController()
-                NavHost(navController = navController, startDestination = "docSignUp" ){
+                NavHost(navController = navController, startDestination = "docSignUpLoginTerms" ){
                     composable("docSignUp"){
                         docSignUp(navController=navController)
                     }
