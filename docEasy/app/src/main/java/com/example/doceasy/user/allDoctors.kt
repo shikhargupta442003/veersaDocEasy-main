@@ -34,10 +34,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.doceasy.R
+import com.google.firebase.database.FirebaseDatabase
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun allDoctors(navController: NavController,email:String?
+fun allDoctors(navController: NavController,email:String?,database: FirebaseDatabase
 ) {
     Scaffold(
         topBar = {

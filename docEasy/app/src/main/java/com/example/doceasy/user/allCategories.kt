@@ -47,10 +47,11 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.doceasy.R
 import com.example.doceasy.data.Specialist
+import com.google.firebase.database.FirebaseDatabase
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun allCategories(navController: NavController,email:String?
+fun allCategories(navController: NavController,email:String?,database: FirebaseDatabase
 ) {
     var category by remember {
         mutableStateOf(false)
@@ -131,7 +132,7 @@ fun allCategories(navController: NavController,email:String?
                                     .width(140.dp)
                                     .height(80.dp).clickable {
                                                              category=true
-                                        navController.navigate("docProfileUser/$email")
+                                        navController.navigate("allDoctors/$email")
                                     },colors = CardDefaults.cardColors(
                                     containerColor = Color(0xff00de8e)
                                 )) {
@@ -167,7 +168,7 @@ fun allCategories(navController: NavController,email:String?
                         Card(modifier = Modifier
                             .padding(20.dp).fillMaxWidth()
                             .height(160.dp).clickable {
-                                navController.navigate("docProfileUser/$email")
+                                navController.navigate("allDoctors/$email")
                             },colors = CardDefaults.cardColors(
                             containerColor = Color(0x0F20201F)
                         )){

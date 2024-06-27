@@ -41,7 +41,9 @@ fun userPersonalDetails(navController: NavController,email:String?) {
     var phone by remember {
         mutableStateOf("")
     }
-
+    var name by remember {
+        mutableStateOf("")
+    }
     val context= LocalContext.current
     Column(
         modifier = Modifier
@@ -56,6 +58,37 @@ fun userPersonalDetails(navController: NavController,email:String?) {
                 fontWeight = FontWeight.ExtraBold
             )
         }
+
+        Text(
+            text = "Enter Name",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.SemiBold,
+            modifier = Modifier.padding(bottom = 8.dp)
+        )
+        Box(
+            modifier = Modifier
+                .clip(RoundedCornerShape(12.dp))
+                .background(color = colorResource(id = R.color.box_inside_color))
+        ) {
+            OutlinedTextField(
+                value = name,
+                shape = RoundedCornerShape(12.dp),
+                modifier = Modifier
+                    .background(color = colorResource(id = R.color.box_inside_color))
+                    .fillMaxWidth(),
+                placeholder = {
+                    Text(
+                        "Enter Your Name",
+                        color = colorResource(id = R.color.box_hint_color),
+                        fontWeight = FontWeight.Bold
+                    )
+                },
+                onValueChange = {
+                    name=it
+                }
+            )
+        }
+        Spacer(modifier = Modifier.padding(vertical = 4.dp))
         Text(
             text = "Enter Age",
             fontSize = 18.sp,
@@ -152,6 +185,7 @@ fun userPersonalDetails(navController: NavController,email:String?) {
                 val updates = mutableMapOf<String, Any>()
                 updates["email"] = email.toString()
                 updates["age"] = age
+                updates["name"]=name
                 updates["gender"] = gender
                 updates["phone"] = phone
 

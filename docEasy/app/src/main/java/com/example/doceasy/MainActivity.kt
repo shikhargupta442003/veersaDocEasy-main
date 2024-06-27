@@ -21,12 +21,15 @@ import com.example.doceasy.user.userProfile
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         lateinit var auth: FirebaseAuth
         auth=FirebaseAuth.getInstance()
+        lateinit var database: FirebaseDatabase
+        database = FirebaseDatabase.getInstance()
         lateinit var fusedLocationClient: FusedLocationProviderClient
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         setContent {
@@ -69,7 +72,7 @@ class MainActivity : ComponentActivity() {
                     composable("docProfileUser/{email}"){
                             backStackEntry ->
                         val email = backStackEntry.arguments?.getString("email")
-                        docProfileUser(navController=navController,email)
+                        docProfileUser(navController=navController,email,database)
                     }
                     composable("userSignUp"){
                         userSignUp(navController=navController,auth)
@@ -77,22 +80,22 @@ class MainActivity : ComponentActivity() {
                     composable("userProfile/{email}"){
                             backStackEntry ->
                         val email = backStackEntry.arguments?.getString("email")
-                        userProfile(navController=navController,email)
+                        userProfile(navController=navController,email,database)
                     }
                     composable("docProfileUser/{email}"){
                             backStackEntry ->
                         val email = backStackEntry.arguments?.getString("email")
-                        docProfileUser(navController=navController,email)
+                        docProfileUser(navController=navController,email,database)
                     }
                     composable("allDoctors/{email}"){
                             backStackEntry ->
                         val email = backStackEntry.arguments?.getString("email")
-                        allDoctors(navController=navController,email)
+                        allDoctors(navController=navController,email,database)
                     }
                     composable("allCategories/{email}"){
                             backStackEntry ->
                         val email = backStackEntry.arguments?.getString("email")
-                        allCategories(navController=navController,email)
+                        allCategories(navController=navController,email,database)
                     }
 
                 }

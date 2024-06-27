@@ -35,13 +35,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.doceasy.R
+import com.google.firebase.database.FirebaseDatabase
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun docProfileUser(navController: NavController,email:String?){
+fun docProfileUser(navController: NavController,email:String?,database: FirebaseDatabase){
     Scaffold(
         topBar = {
             TopAppBar(
