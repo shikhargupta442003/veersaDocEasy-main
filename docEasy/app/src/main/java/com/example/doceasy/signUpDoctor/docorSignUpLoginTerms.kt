@@ -1,5 +1,6 @@
 package com.example.doceasy.signUpDoctor
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -26,11 +27,14 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.doceasy.R
+import com.example.doceasy.data.doctorData
+import com.example.doceasy.data.saveDoctorData
 
 @Composable
 fun docSignUpLoginTerms(){
@@ -40,6 +44,7 @@ fun docSignUpLoginTerms(){
     var password by remember {
         mutableStateOf("")
     }
+    val context= LocalContext.current
 
 
     Column(
@@ -126,7 +131,15 @@ fun docSignUpLoginTerms(){
         Spacer(modifier = Modifier.padding(vertical = 4.dp))
 
         Button(
-            onClick = {},
+            onClick = {
+                val doctor= doctorData(
+                    email = email,
+                    password = password
+                )
+                saveDoctorData(doctor, onSucess = { Toast.makeText(context, "Data saved successfully", Toast.LENGTH_SHORT).show()}, onFailure = { exception->
+                    Toast.makeText(context, "Error: ${exception.message}", Toast.LENGTH_SHORT).show()})
+
+            },
             shape = RoundedCornerShape(12.dp),
             modifier = Modifier
                 .fillMaxWidth()

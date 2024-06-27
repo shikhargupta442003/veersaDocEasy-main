@@ -27,6 +27,7 @@ data class doctorData(
     val paymentMethod:String="",
     val insurancePartner:String="",
     val emergencyContact:String="",
+    val password:String="",
 )
 fun doctorData.toMap():Map<String,Any?>{
     return mapOf(
@@ -53,6 +54,7 @@ fun doctorData.toMap():Map<String,Any?>{
         "paymentMethod" to paymentMethod,
         "insurancePartner" to insurancePartner,
         "emergencyContact" to emergencyContact,
+        "password" to password,
     )
 }
 fun saveDoctorData(doctor:doctorData,onSucess:()->Unit,onFailure:(Exception)->Unit){
