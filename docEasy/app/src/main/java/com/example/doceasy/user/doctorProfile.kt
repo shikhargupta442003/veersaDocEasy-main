@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -34,10 +35,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.doceasy.R
+import com.google.firebase.database.FirebaseDatabase
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun docProfileUser(navController: NavController){
+fun docProfileUser(navController: NavController,email:String?,database: FirebaseDatabase){
     Scaffold(
         topBar = {
             TopAppBar(
@@ -46,15 +51,15 @@ fun docProfileUser(navController: NavController){
                         modifier = Modifier.fillMaxWidth()
                     ) {
                         Image(
-                            painter = painterResource(R.drawable.ic_launcher_background),
+                            painter = painterResource(R.drawable.back),
                             contentDescription = "avatar",
                             contentScale = ContentScale.Crop,            // crop the image if it's not a square
                             modifier = Modifier
-                                .size(20.dp)
+                                .size(35.dp)
                             // add a border (optional)
                         )
 
-                        Text("All Doctors", fontSize = 16.sp)
+                        Text("    Doctors", fontSize = 24.sp)
 
 
                     }
@@ -76,7 +81,7 @@ fun docProfileUser(navController: NavController){
             ) {
                 Row(modifier = Modifier.padding(20.dp)) {
                     Image(
-                        painter = painterResource(R.drawable.ic_launcher_background),
+                        painter = painterResource(R.drawable.male_doctor),
                         contentDescription = "avatar",
                         contentScale = ContentScale.Crop,            // crop the image if it's not a square
                         modifier = Modifier
@@ -91,7 +96,7 @@ fun docProfileUser(navController: NavController){
                         ) {
                             Text("Dr. Pawan")
                             Image(
-                                painter = painterResource(R.drawable.ic_launcher_background),
+                                painter = painterResource(R.drawable.phone),
                                 contentDescription = "avatar",
                                 contentScale = ContentScale.Crop,            // crop the image if it's not a square
                                 modifier = Modifier
@@ -124,32 +129,6 @@ fun docProfileUser(navController: NavController){
                     .padding(top = 12.dp)
                     .fillMaxWidth()
             ) {
-                Text("TimeSlot")
-                Text("See All")
-            }
-            LazyRow {
-                items(3) {
-                    Card(
-                        modifier = Modifier
-                            .padding(20.dp)
-                            .width(120.dp)
-                            .height(50.dp), colors = CardDefaults.cardColors(
-                            containerColor = Color(0xff00de8e)
-                        )
-                    ) {
-                        Text(
-                            "$it", textAlign = TextAlign.Center, modifier = Modifier
-                                .fillMaxSize()
-                                .align(Alignment.CenterHorizontally)
-                        )
-                    }
-                }
-            }
-            Row(
-                horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier
-                    .padding(top = 12.dp)
-                    .fillMaxWidth()
-            ) {
                 Text("Date")
                 Text("See All")
             }
@@ -164,9 +143,43 @@ fun docProfileUser(navController: NavController){
                         )
                     ) {
                         Text(
-                            "$it", textAlign = TextAlign.Center, modifier = Modifier
+                            "$it", textAlign = TextAlign.Center,
+                                fontWeight = FontWeight.Bold,
+                                color = Color.White,
+                                modifier = Modifier
                                 .fillMaxSize()
                                 .align(Alignment.CenterHorizontally)
+                                .padding(vertical = 12.dp)
+                        )
+                    }
+                }
+            }
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier
+                    .padding(top = 12.dp)
+                    .fillMaxWidth()
+            ) {
+                Text("TimeSlot")
+                Text("See All")
+            }
+            LazyRow {
+                items(generateTimeSlots("1-5")) {
+                    Card(
+                        modifier = Modifier
+                            .padding(20.dp)
+                            .width(120.dp)
+                            .height(50.dp), colors = CardDefaults.cardColors(
+                            containerColor = Color(0xff00de8e)
+                        )
+                    ) {
+                        Text(
+                            "$it", textAlign = TextAlign.Center,
+                                fontWeight = FontWeight.Bold,
+                                color = Color.White,
+                                modifier = Modifier
+                                .fillMaxSize()
+                                .align(Alignment.CenterHorizontally)
+                                .padding(vertical = 12.dp)
                         )
                     }
                 }
@@ -186,4 +199,26 @@ fun docProfileUser(navController: NavController){
             }
         }
     }
+}
+fun generateTimeSlots(input:String):List<String>{
+    val (start,end)=input.split("-").map{it.toInt()}
+    val timeSlots = mutableListOf<String>()
+    val dateFormat = SimpleDateFormat("h:mm", Locale.getDefault())
+
+    for (hour in start until end) {
+        var calendar = Calendar.getInstance().apply {
+            set(Calendar.HOUR_OF_DAY, hour)
+            set(Calendar.MINUTE, 0)
+        }
+        while (calendar.get(Calendar.HOUR_OF_DAY) < hour + 1) {
+            val startTime = dateFormat.format(calendar.time)
+            calendar.add(Calendar.MINUTE, 20)
+            val endTime = dateFormat.format(calendar.time)
+            if (calendar.get(Calendar.HOUR_OF_DAY) < hour + 1 || (calendar.get(Calendar.HOUR_OF_DAY) == hour + 1 && calendar.get(Calendar.MINUTE) == 0)) {
+                timeSlots.add("$startTime-$endTime")
+            }
+        }
+    }
+
+    return timeSlots
 }

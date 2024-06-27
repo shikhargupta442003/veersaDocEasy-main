@@ -3,6 +3,7 @@ package com.example.doceasy.user
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -37,15 +39,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.doceasy.R
 import com.example.doceasy.data.Specialist
+import com.google.firebase.database.FirebaseDatabase
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun allCategories(navController: NavController
+fun allCategories(navController: NavController,email:String?,database: FirebaseDatabase
 ) {
     var category by remember {
         mutableStateOf(false)
@@ -58,15 +64,15 @@ fun allCategories(navController: NavController
                         modifier = Modifier.fillMaxWidth()
                     ) {
                         Image(
-                            painter = painterResource(R.drawable.ic_launcher_background),
+                            painter = painterResource(R.drawable.back),
                             contentDescription = "avatar",
                             contentScale = ContentScale.Crop,            // crop the image if it's not a square
                             modifier = Modifier
-                                .size(20.dp)
+                                .size(35.dp)
                             // add a border (optional)
                         )
 
-                        Text("All Category", fontSize = 16.sp)
+                        Text("    All Category", fontSize = 24.sp)
 
 
                     }
@@ -79,7 +85,7 @@ fun allCategories(navController: NavController
                 modifier = Modifier
                     .padding(horizontal = 20.dp, vertical = 24.dp)
                     .fillMaxWidth()
-                    .height(50.dp)
+                    .height(60.dp)
             ) {
 
                 OutlinedTextField(
@@ -97,7 +103,7 @@ fun allCategories(navController: NavController
                     },
                     trailingIcon = {
                         Icon(
-                            painter = painterResource(id = R.drawable.ic_launcher_background),
+                            painter = painterResource(id = R.drawable.microphone),
                             contentDescription = "Search",
                             tint = MaterialTheme.colorScheme.primary,
                             modifier = Modifier.size(21.dp)
@@ -123,13 +129,31 @@ fun allCategories(navController: NavController
                             pair.forEach { specialist ->
                                 Card(modifier = Modifier
                                     .padding(20.dp)
-                                    .width(120.dp)
-                                    .height(70.dp).clickable {
+                                    .width(140.dp)
+                                    .height(80.dp).clickable {
                                                              category=true
+                                        navController.navigate("allDoctors/$email")
                                     },colors = CardDefaults.cardColors(
                                     containerColor = Color(0xff00de8e)
                                 )) {
-                                    Text(text = specialist.name, fontSize = 16.sp)
+                                    Box(
+                                        modifier = Modifier.fillMaxSize(),
+                                        contentAlignment = Alignment.Center
+                                    ) {
+                                        Text(
+                                            text = specialist.name,
+                                            color = Color.White,
+                                            fontSize = 14.sp,
+                                            textAlign = TextAlign.Center,
+                                            fontWeight = FontWeight.Bold,
+                                            modifier = Modifier
+                                                .wrapContentSize()
+                                                .padding(horizontal = 8.dp)
+                                                .fillMaxWidth(),
+                                            overflow = TextOverflow.Ellipsis,
+                                            maxLines = 1
+                                        )
+                                    }
                                 }
                             }
                             if (pair.size < 2) {
@@ -143,12 +167,14 @@ fun allCategories(navController: NavController
                     items(20){
                         Card(modifier = Modifier
                             .padding(20.dp).fillMaxWidth()
-                            .height(160.dp),colors = CardDefaults.cardColors(
+                            .height(160.dp).clickable {
+                                navController.navigate("allDoctors/$email")
+                            },colors = CardDefaults.cardColors(
                             containerColor = Color(0x0F20201F)
                         )){
                             Row(modifier = Modifier.padding(20.dp)){
                                 Image(
-                                    painter = painterResource(R.drawable.ic_launcher_background),
+                                    painter = painterResource(R.drawable.female_doctor),
                                     contentDescription = "avatar",
                                     contentScale = ContentScale.Crop,            // crop the image if it's not a square
                                     modifier = Modifier
@@ -160,7 +186,7 @@ fun allCategories(navController: NavController
                                     Row(modifier=Modifier.width(200.dp), horizontalArrangement = Arrangement.SpaceBetween){
                                         Text("Dr. Pawan")
                                         Image(
-                                            painter = painterResource(R.drawable.ic_launcher_background),
+                                            painter = painterResource(R.drawable.heart_431),
                                             contentDescription = "avatar",
                                             contentScale = ContentScale.Crop,            // crop the image if it's not a square
                                             modifier = Modifier
@@ -178,7 +204,7 @@ fun allCategories(navController: NavController
                                         }
                                         Row(){
                                             Image(
-                                                painter = painterResource(R.drawable.ic_launcher_background),
+                                                painter = painterResource(R.drawable.star),
                                                 contentDescription = "avatar",
                                                 contentScale = ContentScale.Crop,            // crop the image if it's not a square
                                                 modifier = Modifier

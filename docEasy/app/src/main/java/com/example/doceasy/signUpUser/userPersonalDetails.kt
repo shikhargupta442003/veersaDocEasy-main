@@ -2,12 +2,10 @@ package com.example.doceasy.signUpUser
 
 import android.widget.Toast
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -20,13 +18,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.PathEffect
-import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
@@ -34,12 +27,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.doceasy.R
-import com.example.doceasy.data.doctorData
-import com.example.doceasy.data.saveDoctorData
+import com.example.doceasy.data.savePatientData
 
 
 @Composable
-fun userPersonalDetails(navController: NavController) {
+fun userPersonalDetails(navController: NavController,email:String?) {
     var age by remember {
         mutableStateOf("")
     }
@@ -49,7 +41,9 @@ fun userPersonalDetails(navController: NavController) {
     var phone by remember {
         mutableStateOf("")
     }
-
+    var name by remember {
+        mutableStateOf("")
+    }
     val context= LocalContext.current
     Column(
         modifier = Modifier
@@ -64,6 +58,37 @@ fun userPersonalDetails(navController: NavController) {
                 fontWeight = FontWeight.ExtraBold
             )
         }
+
+        Text(
+            text = "Enter Name",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.SemiBold,
+            modifier = Modifier.padding(bottom = 8.dp)
+        )
+        Box(
+            modifier = Modifier
+                .clip(RoundedCornerShape(12.dp))
+                .background(color = colorResource(id = R.color.box_inside_color))
+        ) {
+            OutlinedTextField(
+                value = name,
+                shape = RoundedCornerShape(12.dp),
+                modifier = Modifier
+                    .background(color = colorResource(id = R.color.box_inside_color))
+                    .fillMaxWidth(),
+                placeholder = {
+                    Text(
+                        "Enter Your Name",
+                        color = colorResource(id = R.color.box_hint_color),
+                        fontWeight = FontWeight.Bold
+                    )
+                },
+                onValueChange = {
+                    name=it
+                }
+            )
+        }
+        Spacer(modifier = Modifier.padding(vertical = 4.dp))
         Text(
             text = "Enter Age",
             fontSize = 18.sp,
@@ -157,14 +182,17 @@ fun userPersonalDetails(navController: NavController) {
 
         Button(
             onClick = {
-                val doctor=doctorData(
-                    age = age,
-                    gender = gender,
-                    phone = phone,
-                )
-                saveDoctorData(doctor, onSucess = { Toast.makeText(context, "Data saved successfully", Toast.LENGTH_SHORT).show()}, onFailure = {exception->
-                    Toast.makeText(context, "Error: ${exception.message}", Toast.LENGTH_SHORT).show()})
-                navController.navigate("docSignUpContactInfo")
+                val updates = mutableMapOf<String, Any>()
+                updates["email"] = email.toString()
+                updates["age"] = age
+                updates["name"]=name
+                updates["gender"] = gender
+                updates["phone"] = phone
+
+                savePatientData( email.toString(), onSucess = { Toast.makeText(context, "Data saved successfully", Toast.LENGTH_SHORT).show()}, onFailure = { exception->
+                    Toast.makeText(context, "Error: ${exception.message}", Toast.LENGTH_SHORT).show()},updates)
+                navController.navigate("userProfile/$email")
+
             },
             shape = RoundedCornerShape(12.dp),
             modifier = Modifier

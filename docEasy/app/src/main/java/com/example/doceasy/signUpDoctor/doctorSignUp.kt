@@ -34,12 +34,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.doceasy.R
-import com.example.doceasy.data.doctorData
 import com.example.doceasy.data.saveDoctorData
 
 
 @Composable
-fun docSignUp(navController: NavController) {
+fun docSignUp(navController: NavController,email:String?) {
     var name by remember {
         mutableStateOf("")
     }
@@ -209,16 +208,15 @@ fun docSignUp(navController: NavController) {
         }
         Button(
             onClick = {
-                      val doctor=doctorData(
-                          name = name,
-                          gender = gender,
-                          dob = dob,
-                          mobileNo = mobileNo,
-                          profilePic = profileImage
-                      )
-                saveDoctorData(doctor, onSucess = { Toast.makeText(context, "Data saved successfully", Toast.LENGTH_SHORT).show()}, onFailure = {exception->
-                    Toast.makeText(context, "Error: ${exception.message}", Toast.LENGTH_SHORT).show()})
-                navController.navigate("docSignUpContactInfo")
+                val updates = mutableMapOf<String, Any>()
+                updates["email"] = email.toString()
+                updates["name"] = name
+                updates["gender"] = gender
+                updates["dob"] = dob
+                updates["mobileNo"] = mobileNo
+                saveDoctorData(email.toString(), onSucess = { Toast.makeText(context, "Data saved successfully", Toast.LENGTH_SHORT).show()}, onFailure = {exception->
+                    Toast.makeText(context, "Error: ${exception.message}", Toast.LENGTH_SHORT).show()},updates)
+                navController.navigate("docSignUpContactInfo/$email")
             },
             shape = RoundedCornerShape(12.dp),
             modifier = Modifier

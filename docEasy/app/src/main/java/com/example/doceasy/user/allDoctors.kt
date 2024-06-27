@@ -34,10 +34,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.doceasy.R
+import com.google.firebase.database.FirebaseDatabase
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun allDoctors(navController: NavController
+fun allDoctors(navController: NavController,email:String?,database: FirebaseDatabase
 ) {
     Scaffold(
         topBar = {
@@ -47,15 +48,15 @@ fun allDoctors(navController: NavController
                         modifier = Modifier.fillMaxWidth()
                     ) {
                         Image(
-                            painter = painterResource(R.drawable.ic_launcher_background),
+                            painter = painterResource(R.drawable.back),
                             contentDescription = "avatar",
                             contentScale = ContentScale.Crop,            // crop the image if it's not a square
                             modifier = Modifier
-                                .size(20.dp)
+                                .size(35.dp)
                             // add a border (optional)
                         )
 
-                        Text("All Doctors", fontSize = 16.sp)
+                        Text("    All Doctors", fontSize = 24.sp)
 
 
                     }
@@ -68,7 +69,7 @@ fun allDoctors(navController: NavController
                 modifier = Modifier
                     .padding(horizontal = 20.dp, vertical = 24.dp)
                     .fillMaxWidth()
-                    .height(50.dp)
+                    .height(60.dp)
             ) {
 
                 OutlinedTextField(
@@ -86,7 +87,7 @@ fun allDoctors(navController: NavController
                     },
                     trailingIcon = {
                         Icon(
-                            painter = painterResource(id = R.drawable.ic_launcher_background),
+                            painter = painterResource(id = R.drawable.microphone),
                             contentDescription = "Search",
                             tint = MaterialTheme.colorScheme.primary,
                             modifier = Modifier.size(21.dp)
@@ -109,7 +110,7 @@ fun allDoctors(navController: NavController
                         )){
                             Row(modifier = Modifier.padding(20.dp)){
                                 Image(
-                                    painter = painterResource(R.drawable.ic_launcher_background),
+                                    painter = painterResource(R.drawable.female_doctor),
                                     contentDescription = "avatar",
                                     contentScale = ContentScale.Crop,            // crop the image if it's not a square
                                     modifier = Modifier
@@ -121,7 +122,7 @@ fun allDoctors(navController: NavController
                                     Row(modifier= Modifier.width(200.dp), horizontalArrangement = Arrangement.SpaceBetween){
                                         Text("Dr. Pawan")
                                         Image(
-                                            painter = painterResource(R.drawable.ic_launcher_background),
+                                            painter = painterResource(R.drawable.heart_431),
                                             contentDescription = "avatar",
                                             contentScale = ContentScale.Crop,            // crop the image if it's not a square
                                             modifier = Modifier
@@ -139,7 +140,7 @@ fun allDoctors(navController: NavController
                                         }
                                         Row(){
                                             Image(
-                                                painter = painterResource(R.drawable.ic_launcher_background),
+                                                painter = painterResource(R.drawable.star),
                                                 contentDescription = "avatar",
                                                 contentScale = ContentScale.Crop,            // crop the image if it's not a square
                                                 modifier = Modifier

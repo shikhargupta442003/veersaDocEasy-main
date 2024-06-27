@@ -27,11 +27,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.doceasy.R
-import com.example.doceasy.data.doctorData
 import com.example.doceasy.data.saveDoctorData
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 @Composable
-fun docSignUpWorkInfo(navController: NavController){
+fun docSignUpWorkInfo(navController: NavController,email:String?){
     var consultationFees by remember {
         mutableStateOf("")
     }
@@ -42,6 +44,7 @@ fun docSignUpWorkInfo(navController: NavController){
         mutableStateOf("")
     }
     val context= LocalContext.current
+    var timeslotlist by remember { mutableStateOf(listOf<Pair<String, Int>>()) }
     Column(
         modifier = Modifier
             .padding(horizontal = 20.dp)
@@ -135,22 +138,26 @@ fun docSignUpWorkInfo(navController: NavController){
                 placeholder = { Text("Enter Your TimeSlots", fontWeight = FontWeight.Bold) },
                 onValueChange = {
                     timeSlots=it
+                    timeslotlist= generateTimeSlots(timeSlots)
                 }
             )
         }
 
         Spacer(modifier = Modifier.padding(vertical = 4.dp))
 
+
         Button(
             onClick = {
-                val doctor= doctorData(
-                    fees = consultationFees ,
-                    availableHours = availableHours,
-                    timeSlots = timeSlots
-                )
-                saveDoctorData(doctor, onSucess = { Toast.makeText(context, "Data saved successfully", Toast.LENGTH_SHORT).show()}, onFailure = { exception->
-                    Toast.makeText(context, "Error: ${exception.message}", Toast.LENGTH_SHORT).show()})
-                navController.navigate("docSignUpProfessionalInfo")
+                generateTimeSlots(timeSlots)
+                val updates = mutableMapOf<String, Any>()
+                updates["email"] = email.toString()
+                updates["fees"] = consultationFees
+                updates["availableHours"] = availableHours
+                updates["timeslotList"] = timeslotlist
+                updates["timeSlots"] = timeSlots
+                saveDoctorData( email=email.toString(),onSucess = { Toast.makeText(context, "Data saved successfully", Toast.LENGTH_SHORT).show()}, onFailure = { exception->
+                    Toast.makeText(context, "Error: ${exception.message}", Toast.LENGTH_SHORT).show()},updates)
+                navController.navigate("docSignUpProfessionalInfo/$email")
 
             },
             shape = RoundedCornerShape(12.dp),
@@ -174,4 +181,38 @@ fun docSignUpWorkInfo(navController: NavController){
             Text(text = "Back", fontWeight = FontWeight.ExtraBold, fontSize = 20.sp)
         }
     }
+}
+fun generateTimeSlots(input:String):List<Pair<String, Int>>{
+    val parts = input.split("-")
+    if (parts.size < 2) {
+        // Return an empty list or throw an error if the input format is incorrect
+        return emptyList()
+    }
+    val start = parts[0].toIntOrNull()
+    val end = parts[1].toIntOrNull()
+
+    if (start == null || end == null) {
+        // Return an empty list if start or end is not a valid number
+        return emptyList()
+    }
+    val timeSlots = mutableListOf<Pair<String, Int>>()
+    val dateFormat = SimpleDateFormat("h:mm", Locale.getDefault())
+
+    for (hour in start until end) {
+        var calendar = Calendar.getInstance().apply {
+            set(Calendar.HOUR_OF_DAY, hour)
+            set(Calendar.MINUTE, 0)
+        }
+        while (calendar.get(Calendar.HOUR_OF_DAY) < hour + 1) {
+            val startTime = dateFormat.format(calendar.time)
+            calendar.add(Calendar.MINUTE, 20)
+            val endTime = dateFormat.format(calendar.time)
+            if (calendar.get(Calendar.HOUR_OF_DAY) < hour + 1 || (calendar.get(Calendar.HOUR_OF_DAY) == hour + 1 && calendar.get(
+                    Calendar.MINUTE) == 0)) {
+                timeSlots.add("$startTime-$endTime" to 1)
+            }
+        }
+    }
+
+    return timeSlots
 }
