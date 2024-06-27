@@ -10,9 +10,11 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -39,7 +41,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -56,26 +60,35 @@ fun userProfile(navController: NavController){
                     Row(
                         modifier=Modifier.fillMaxWidth()
                     ){
-                        Image(
-                            painter = painterResource(R.drawable.ic_launcher_background),
-                            contentDescription = "avatar",
-                            contentScale = ContentScale.Crop,            // crop the image if it's not a square
-                            modifier = Modifier
-                                .size(48.dp)
-                                .clip(CircleShape)                       // clip to the circle shape
-                                .border(2.dp, Color.Gray, CircleShape)   // add a border (optional)
-                        )
                         Column {
+                            Spacer(modifier = Modifier.padding(start = 10.dp, top = 20.dp))
+
+                            Image(
+                                painter = painterResource(R.drawable.user),
+                                contentDescription = "avatar",
+                                contentScale = ContentScale.Crop,            // crop the image if it's not a square
+                                modifier = Modifier
+                                    .size(48.dp)
+                                    .clip(CircleShape)                       // clip to the circle shape
+
+                                //.border(2.dp, Color.Black, CircleShape) // add a border (optional)
+                            )
+                        }
+                        Column(Modifier.padding(start = 24.dp, top = 12.dp)) {
+
                             Text("Hi, Welcome Back,", fontSize = 16.sp)
                             Text("Shikhar Gupta")
                         }
-                        Box(modifier=Modifier.padding(start=100.dp)){
+                        Box(modifier= Modifier
+                            .padding(start = 100.dp)
+                            .align(Alignment.CenterVertically)){
                             Image(
-                                painter = painterResource(R.drawable.ic_launcher_background),
+                                painter = painterResource(R.drawable.notification_bell),
                                 contentDescription = "Notification",
                                 contentScale = ContentScale.Crop,            // crop the image if it's not a square
                                 modifier = Modifier
                                     .size(24.dp)
+                                    .offset(y = 8.dp)
                                 // add a border (optional)
                             )
                         }
@@ -126,7 +139,7 @@ fun userProfile(navController: NavController){
                 modifier = Modifier
                     .padding(horizontal = 20.dp, vertical = 24.dp)
                     .fillMaxWidth()
-                    .height(50.dp)
+                    .height(60.dp)
             ) {
 
                 OutlinedTextField(
@@ -144,7 +157,7 @@ fun userProfile(navController: NavController){
                     },
                     trailingIcon = {
                         Icon(
-                            painter = painterResource(id = R.drawable.ic_launcher_background),
+                            painter = painterResource(id = R.drawable.microphone),
                             contentDescription = "Search",
                             tint = MaterialTheme.colorScheme.primary,
                             modifier = Modifier.size(21.dp)
@@ -165,11 +178,24 @@ fun userProfile(navController: NavController){
                 .padding(horizontal = 30.dp, vertical = 10.dp), colors = CardDefaults.cardColors(
                 containerColor = Color(0xff0b8fac),
             )) {
-                Row(){
-                    Column(modifier=Modifier.width(150.dp)){
-                        Text("Medical Center")
-                        Text("jdjb d vsfsbnfvsb sfisnfs ")
+                Row(modifier = Modifier.padding(top = 20.dp)){
+                    Column(modifier= Modifier
+                        .width(200.dp)
+                        .padding(start = 10.dp)){
+                        Text("Medical Center", color = Color.White, fontSize = 20.sp)
+                        Text("Yorem ipsum dolor sit amett. Nunc vulputate libero et velit interdum.", fontSize = 10.sp,color = Color.White, modifier = Modifier.padding(end = 10.dp))
+
                     }
+
+                    Image(
+                        painter = painterResource(R.drawable.male_doctor),
+                        contentDescription = "avatar",
+                        contentScale = ContentScale.Crop,            // crop the image if it's not a square
+                        modifier = Modifier
+                            .size(100.dp)
+                        // clip to the circle shape
+                        // add a border (optional)
+                    )
                 }
             }
             Row(modifier= Modifier
@@ -181,13 +207,31 @@ fun userProfile(navController: NavController){
             LazyRow {
                 items(Specialist.predefinedSpecialists){specialist->
                     Card(modifier = Modifier
-                        .padding(20.dp)
+                        .padding(10.dp)
                         .width(120.dp)
                         .height(50.dp),colors = CardDefaults.cardColors(
-                        containerColor = Color(0xff00de8e))){
-                        Text("${specialist.name}", textAlign = TextAlign.Center,modifier= Modifier
-                            .fillMaxSize()
-                            .align(Alignment.CenterHorizontally))
+                        containerColor = Color(0xff00de8e))) {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(horizontal = 2.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(
+                                "${specialist.name}",
+                                color = Color.White,
+                                fontSize = 14.sp,
+                                textAlign = TextAlign.Center,
+                                fontWeight = FontWeight.Bold,
+                                modifier = Modifier
+                                    .wrapContentSize()
+                                    .padding(horizontal = 8.dp)
+                                    .fillMaxWidth(),
+                                overflow = TextOverflow.Ellipsis,
+                                maxLines = 1
+
+                            )
+                        }
                     }
 
                 }
@@ -208,7 +252,7 @@ fun userProfile(navController: NavController){
                     )){
                         Row(modifier = Modifier.padding(20.dp)){
                                 Image(
-                                    painter = painterResource(R.drawable.ic_launcher_background),
+                                    painter = painterResource(R.drawable.male_surgon),
                                     contentDescription = "avatar",
                                     contentScale = ContentScale.Crop,            // crop the image if it's not a square
                                     modifier = Modifier
@@ -220,7 +264,7 @@ fun userProfile(navController: NavController){
                                 Row(modifier=Modifier.width(200.dp), horizontalArrangement = Arrangement.SpaceBetween){
                                     Text("Dr. Pawan")
                                     Image(
-                                        painter = painterResource(R.drawable.ic_launcher_background),
+                                        painter = painterResource(R.drawable.heart_431),
                                         contentDescription = "avatar",
                                         contentScale = ContentScale.Crop,            // crop the image if it's not a square
                                         modifier = Modifier
@@ -238,7 +282,7 @@ fun userProfile(navController: NavController){
                                     }
                                     Row(){
                                         Image(
-                                            painter = painterResource(R.drawable.ic_launcher_background),
+                                            painter = painterResource(R.drawable.star),
                                             contentDescription = "avatar",
                                             contentScale = ContentScale.Crop,            // crop the image if it's not a square
                                             modifier = Modifier
