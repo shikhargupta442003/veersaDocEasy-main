@@ -73,11 +73,11 @@ dependencies {
 
     implementation ("androidx.compose.material:material-icons-core:1.6.7")
     implementation ("androidx.compose.material:material-icons-extended:1.6.7")
-   implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
-   implementation ("androidx.constraintlayout:constraintlayout-compose:1.0.1")
-   implementation ("androidx.compose.ui:ui:1.6.7")
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
+    implementation ("androidx.constraintlayout:constraintlayout-compose:1.0.1")
+    implementation ("androidx.compose.ui:ui:1.6.7")
 
-   implementation("androidx.compose.material3:material3:1.2.1")
+    implementation("androidx.compose.material3:material3:1.2.1")
     implementation("androidx.compose.material3:material3-window-size-class:1.2.1")
     implementation("androidx.compose.material3:material3-adaptive-navigation-suite:1.0.0-alpha06")
 
