@@ -46,7 +46,10 @@ class MainActivity : ComponentActivity() {
         setContent {
             DocEasyTheme {
                 val navController= rememberNavController()
-                NavHost(navController = navController, startDestination = "userSignUp" ){
+                NavHost(navController = navController, startDestination = "DoctorUserPage" ){
+                    composable("DoctorUserPage"){
+                        DoctorUserPage(navController=navController)
+                    }
                     composable("docSignUp/{email}"){
                             backStackEntry ->
                         val email = backStackEntry.arguments?.getString("email")
