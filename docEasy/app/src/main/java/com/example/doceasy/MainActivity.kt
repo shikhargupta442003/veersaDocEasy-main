@@ -35,7 +35,7 @@ class MainActivity : ComponentActivity() {
                         docSignUpProfessionalInfo(navController=navController)
                     }
                     composable("docSignUpContactInfo"){
-                        docSignUpContactInfo(navController=navController)
+                        docSignUpContactInfo(navController=navController, fusedLocationClient)
                     }
                     composable("docSignUpWorkInfo"){
                         docSignUpWorkInfo(navController=navController)
