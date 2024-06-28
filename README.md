@@ -1,6 +1,6 @@
 # DocEasy
 
-    ![1719554297019](image/README/1719554297019.png)
+
 
 LINK FOR FIGMA-https://www.figma.com/design/15SpYp6289sFHuuXEdypIR/Doc-Easy?node-id=0-1&t=5ngZAHaOwO2l29wR-1
 
