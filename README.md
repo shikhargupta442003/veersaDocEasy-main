@@ -1,6 +1,10 @@
 # DocEasy
 
+    ![1719554297019](image/README/1719554297019.png)
+
 LINK FOR FIGMA-https://www.figma.com/design/15SpYp6289sFHuuXEdypIR/Doc-Easy?node-id=0-1&t=5ngZAHaOwO2l29wR-1
+
+LINK FOR YOUTUBE-https://youtu.be/Y9UVt7STZWM?si=KvooNQYBU-70LDcr
 
 **Mobile Application for Scheduling an Appointment for a Patient with Doctor**
 **1.Problem Statement**
@@ -40,18 +44,37 @@ Notifications: Firebase Cloud Messaging
 
 **5.Installation and Setup**
 
-Installation
-git clone https://github.com/aouadimed/Consult-Plus-App.git
+**5.1 Installation**
+git clone https://github.com/shikhargupta442003/veersaDocEasy-main
 
+**5.2 Install the dependencies**																 		Android Studio, dependencies are automatically installed
 
-**Install the dependencies:**
+**5.3 Run the application:																		**for Android Studio, run the app with emulator or physical device
 
-for Android Studio, dependencies are automatically installed
-Run the application:
-
-for Android Studio, run the app with emulator or physical device
-License
+**License**
 This project is released under the MIT License.
 
-Contact
-Feel free to reach out to aouadimed204@gmail.com with any questions or feedback.
+**Contact**
+Open and create an issue for any query
+
+**6.Snapshots of the Application**
+
+![1719553691808](image/README/1719553691808.png)         ![1719553951227](image/README/1719553951227.png)
+
+![1719554010714](image/README/1719554010714.png)          ![1719554024622](image/README/1719554024622.png)
+
+![1719554057903](image/README/1719554057903.png)               ![1719554097616](image/README/1719554097616.png)
+
+**OUR MOBILE APPLICATION LOGO-**
+
+![1719554238984](image/README/1719554238984.png)
+
+**TEAM MEMBERS-**
+
+1)Shikhar Gupta
+
+2)Sarthak Bansal
+
+3)Vibhor Arora
+
+4)Vrisha Garg
